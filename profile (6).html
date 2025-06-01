@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Application - Net Credi Financial Service</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Mobile Bottom Navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid #e5e7eb;
+            box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.1);
+            z-index: 1000;
+            display: block;
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.7rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.25rem;
+        }
+
+        .mobile-nav-item.active,
+        .mobile-nav-item:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            padding: 2rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+        }
+
+        .card h2 {
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+        }
+
+        /* Login Form */
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border: 1px solid #e5e7eb;
+            margin-top: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        /* Application Details */
+        .application-details {
+            display: none;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-pending {
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--warning-color);
+        }
+
+        .status-approved {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        .status-rejected {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Progress Timeline */
+        .timeline {
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            margin-right: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-icon.completed {
+            background: var(--success-color);
+        }
+
+        .timeline-icon.current {
+            background: var(--primary-color);
+        }
+
+        .timeline-icon.pending {
+            background: #e5e7eb;
+            color: var(--text-light);
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-desc {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            width: 2px;
+            height: calc(100% - 20px);
+            background: #e5e7eb;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-item.completed::after {
+            background: var(--success-color);
+        }
+
+        /* Error Message */
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        /* PIN Setup */
+        .pin-setup {
+            display: none;
+        }
+
+        .pin-input {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .pin-digit {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .pin-digit:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--text-dark), #374151);
+            color: white;
+            padding: 2rem 0 1rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 0.75rem;
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4b5563;
+            padding-top: 1rem;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: none;
+            }
+
+            body {
+                padding-bottom: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="home.html" class="logo">
+                <div class="logo-img">
+                    <i class="fas fa-coins"></i>
+                </div>
+                Net Credi
+            </a>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="apply.html">Apply</a></li>
+                <li><a href="review.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="home.html" class="mobile-nav-item">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="apply.html" class="mobile-nav-item">
+                <i class="fas fa-plus-circle"></i>
+                <span>Apply</span>
+            </a>
+            <a href="review.html" class="mobile-nav-item">
+                <i class="fas fa-star"></i>
+                <span>Reviews</span>
+            </a>
+            <a href="contact.html" class="mobile-nav-item">
+                <i class="fas fa-phone"></i>
+                <span>Contact</span>
+            </a>
+            <a href="profile.html" class="mobile-nav-item active">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Track Your Loan Application</h1>
+            <p>Enter your details to view your application status and progress</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <!-- Login Form -->
+            <div class="card login-form" id="loginForm">
+                <h2 style="text-align: center;">Access Your Application</h2>
+                <div class="error-message" id="errorMessage">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorText">Incorrect email or PIN. Please try again.</span>
+                </div>
+                <form id="profileLoginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" name="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPin">Security PIN</label>
+                        <input type="password" id="loginPin" name="loginPin" maxlength="4" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Access Application
+                    </button>
+                </form>
+                <button class="btn btn-secondary" onclick="showFirstTimeSetup()">
+                    <i class="fas fa-user-plus"></i>
+                    First Time? Set Up Access
+                </button>
+            </div>
+
+            <!-- PIN Setup for First Time Users -->
+            <div class="card pin-setup" id="pinSetup">
+                <h2 style="text-align: center;">Set Up Security PIN</h2>
+                <p style="text-align: center; color: var(--text-light); margin-bottom: 1.5rem;">
+                    Enter the email you used when applying for your loan
+                </p>
+                <form id="pinSetupForm">
+                    <div class="form-group">
+                        <label for="setupEmail">Email Address</label>
+                        <input type="email" id="setupEmail" name="setupEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Create 4-Digit PIN</label>
+                        <div class="pin-input">
+                            <input type="password" class="pin-digit" maxlength="1" oninput="movePinFocus(this, 0)">
+                            <input type="password" class="pin-digit" maxlength="1" oninput="movePinFocus(this, 1)">
+                            <input type="password" class="pin-digit" maxlength="1" oninput="movePinFocus(this, 2)">
+                            <input type="password" class="pin-digit" maxlength="1" oninput="movePinFocus(this, 3)">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Set Up PIN
+                    </button>
+                </form>
+                <button class="btn btn-secondary" onclick="showLogin()">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Login
+                </button>
+            </div>
+
+            <!-- Application Details -->
+            <div class="application-details" id="applicationDetails">
+                <div class="card">
+                    <h2>Application Status</h2>
+                    <div id="statusBadge" class="status-badge status-pending">
+                        <i class="fas fa-clock"></i>
+                        <span>Under Review</span>
+                    </div>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item completed">
+                            <div class="timeline-icon completed">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Application Submitted</div>
+                                <div class="timeline-desc">Your application has been received</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item current">
+                            <div class="timeline-icon current">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Under Review</div>
+                                <div class="timeline-desc">Our team is reviewing your application</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon pending">
+                                <i class="fas fa-file-signature"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Approval Decision</div>
+                                <div class="timeline-desc">You'll receive our decision</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon pending">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Funds Disbursed</div>
+                                <div class="timeline-desc">Money transferred to your account</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Application Details</h2>
+                    <div class="detail-grid" id="applicationDetailsGrid">
+                        <!-- Details will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Contact Support</h2>
+                    <p style="margin-bottom: 1rem; color: var(--text-light);">
+                        Need help with your application? Our support team is here to assist you.
+                    </p>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="contact.html" class="btn btn-primary" style="flex: 1; min-width: 200px;">
+                            <i class="fas fa-envelope"></i>
+                            Contact Support
+                        </a>
+                        <a href="tel:+2349012345678" class="btn btn-secondary" style="flex: 1; min-width: 200px;">
+                            <i class="fas fa-phone"></i>
+                            Call Us
+                        </a>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn btn-secondary" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Net Credi Financial</h3>
+                <p>Empowering financial freedom in Nigeria through innovative lending solutions.</p>
+                <div style="margin-top: 1rem;">
+                    <i class="fab fa-facebook" style="margin-right: 1rem; font-size: 1.5rem; color: var(--accent-color);"></i>
+                    <i class="fab fa-twitter" style="margin-right: 1rem; font-size: 1.5rem; color: var(--accent-color);"></i>
+                    <i class="fab fa-linkedin" style="margin-right: 1rem; font-size: 1.5rem; color: var(--accent-color);"></i>
+                    <i class="fab fa-instagram" style="font-size: 1.5rem; color: var(--accent-color);"></i>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="apply.html">Apply Now</a></li>
+                    <li><a href="review.html">Reviews</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="profile.html">Track Application</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Loan Types</h3>
+                <ul>
+                    <li><a href="#">Personal Loans</a></li>
+                    <li><a href="#">Business Loans</a></li>
+                    <li><a href="#">Emergency Loans</a></li>
+                    <li><a href="#">Education Loans</a></li>
+                    <li><a href="#">Vehicle Finance</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-envelope"></i> info@netcredi.com</p>
+                <p><i class="fas fa-phone"></i> +234 901 234 5678</p>
+                <p><i class="fas fa-map-marker-alt"></i> 12 Adeola Street, Ikeja, Lagos</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Net Credi Financial Service. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentUser = null;
+
+        // Show first time setup
+        function showFirstTimeSetup() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('pinSetup').style.display = 'block';
+        }
+
+        // Show login form
+        function showLogin() {
+            document.getElementById('pinSetup').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        }
+
+        // PIN input navigation
+        function movePinFocus(input, index) {
+            if (input.value.length === 1 && index < 3) {
+                const nextInput = input.parentElement.children[index + 1];
+                nextInput.focus();
+            }
+        }
+
+        // PIN Setup Form
+        document.getElementById('pinSetupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('setupEmail').value;
+            const pinDigits = document.querySelectorAll('.pin-digit');
+            const pin = Array.from(pinDigits).map(input => input.value).join('');
+            
+            if (pin.length !== 4) {
+                showError('Please enter a 4-digit PIN');
+                return;
+            }
+
+            // Check if application exists
+            const applications = JSON.parse(localStorage.getItem('netcredi_applications') || '[]');
+            const application = applications.find(app => 
+                app.personalInfo.email.toLowerCase() === email.toLowerCase()
+            );
+
+            if (!application) {
+                showError('No application found with this email address');
+                return;
+            }
+
+            // Save PIN
+            const userPins = JSON.parse(localStorage.getItem('netcredi_user_pins') || '{}');
+            userPins[email.toLowerCase()] = pin;
+            localStorage.setItem('netcredi_user_pins', JSON.stringify(userPins));
+
+            // Auto login
+            currentUser = { email: email.toLowerCase(), application };
+            showApplicationDetails();
+        });
+
+        // Login Form
+        document.getElementById('profileLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value.toLowerCase();
+            const pin = document.getElementById('loginPin').value;
+            
+            // Check PIN
+            const userPins = JSON.parse(localStorage.getItem('netcredi_user_pins') || '{}');
+            if (!userPins[email] || userPins[email] !== pin) {
+                showError('Incorrect email or PIN. Please try again.');
+                return;
+            }
+
+            // Get application
+            const applications = JSON.parse(localStorage.getItem('netcredi_applications') || '[]');
+            const application = applications.find(app => 
+                app.personalInfo.email.toLowerCase() === email
+            );
+
+            if (!application) {
+                showError('No application found with this email address');
+                return;
+            }
+
+            currentUser = { email, application };
+            showApplicationDetails();
+        });
+
+        // Show error message
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorDiv.classList.add('show');
+            
+            setTimeout(() => {
+                errorDiv.classList.remove('show');
+            }, 5000);
+        }
+
+        // Show application details
+        function showApplicationDetails() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('pinSetup').style.display = 'none';
+            document.getElementById('applicationDetails').style.display = 'block';
+            
+            populateApplicationDetails();
+        }
+
+        // Populate application details
+        function populateApplicationDetails() {
+            if (!currentUser || !currentUser.application) return;
+            
+            const app = currentUser.application;
+            const detailsGrid = document.getElementById('applicationDetailsGrid');
+            
+            detailsGrid.innerHTML = `
+                <div class="detail-item">
+                    <span class="detail-label">Application Reference</span>
+                    <span class="detail-value">${app.applicationRef || 'N/A'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Full Name</span>
+                    <span class="detail-value">${app.personalInfo.firstName} ${app.personalInfo.lastName}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Email</span>
+                    <span class="detail-value">${app.personalInfo.email}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Phone</span>
+                    <span class="detail-value">${app.personalInfo.phone}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Loan Type</span>
+                    <span class="detail-value">${getLoanTypeLabel(app.loanDetails.loanType)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Loan Amount</span>
+                    <span class="detail-value">R${parseInt(app.loanDetails.loanAmount).toLocaleString()}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Repayment Period</span>
+                    <span class="detail-value">${app.loanDetails.repaymentPeriod} months</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Monthly Income</span>
+                    <span class="detail-value">R${parseInt(app.employment.monthlyIncome).toLocaleString()}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Employment Status</span>
+                    <span class="detail-value">${getEmploymentLabel(app.employment.employmentStatus)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Application Date</span>
+                    <span class="detail-value">${formatDate(app.applicationDate)}</span>
+                </div>
+            `;
+        }
+
+        // Helper functions
+        function getLoanTypeLabel(type) {
+            const labels = {
+                'personal': 'Personal Loan',
+                'business': 'Business Loan',
+                'emergency': 'Emergency Loan',
+                'education': 'Education Loan',
+                'vehicle': 'Vehicle Finance'
+            };
+            return labels[type] || type;
+        }
+
+        function getEmploymentLabel(status) {
+            const labels = {
+                'employed': 'Employed',
+                'self-employed': 'Self-Employed',
+                'business-owner': 'Business Owner',
+                'pensioner': 'Pensioner',
+                'student': 'Student'
+            };
+            return labels[status] || status;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
+        // Logout function
+        function logout() {
+            currentUser = null;
+            document.getElementById('applicationDetails').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('profileLoginForm').reset();
+        }
+
+        // Check if user is already logged in
+        window.addEventListener('load', () => {
+            // Auto-login logic could be added here if needed
+        });
+    </script>
+</body>
+</html>
