@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews - Net Credi Financial Service</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+            padding-bottom: 80px; /* Space for mobile nav */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        /* Mobile Bottom Navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid #e5e7eb;
+            box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.7rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.25rem;
+        }
+
+        .mobile-nav-item.active,
+        .mobile-nav-item:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--white);
+            padding: 3rem 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 2rem 0;
+            background: var(--bg-light);
+        }
+
+        .filter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--white);
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            color: var(--text-dark);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            padding: 4rem 0;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transition: transform 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .review-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.3;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .reviewer-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-dark);
+        }
+
+        .reviewer-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .review-text {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .review-date {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .loan-type {
+            display: inline-block;
+            background: var(--bg-light);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        /* Write Review Section */
+        .write-review {
+            background: var(--bg-light);
+            padding: 4rem 0;
+        }
+
+        .review-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .star {
+            font-size: 1.5rem;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .star.active,
+        .star:hover {
+            color: #fbbf24;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--text-dark), #374151);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4b5563;
+            padding-top: 1rem;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 767px) {
+            .mobile-nav {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .filter-controls {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .review-form {
+                padding: 2rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero p {
+                font-size: 1.25rem;
+            }
+
+            body {
+                padding-bottom: 0;
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            background: var(--success-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .success-message.show {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="home.html" class="logo">
+                <div class="logo-img">
+                    <i class="fas fa-coins"></i>
+                </div>
+                Net Credi
+            </a>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="apply.html">Apply</a></li>
+                <li><a href="review.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="home.html" class="mobile-nav-item">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="apply.html" class="mobile-nav-item">
+                <i class="fas fa-plus-circle"></i>
+                <span>Apply</span>
+            </a>
+            <a href="review.html" class="mobile-nav-item active">
+                <i class="fas fa-star"></i>
+                <span>Reviews</span>
+            </a>
+            <a href="contact.html" class="mobile-nav-item">
+                <i class="fas fa-phone"></i>
+                <span>Contact</span>
+            </a>
+            <a href="profile.html" class="mobile-nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Real Stories, Real Satisfaction</h1>
+                <p>We're proud to help thousands of South Africans achieve their goals. Here's what some of our happy customers have to say about their experience with Net Credi.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">4.8/5</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2,847</div>
+                    <div class="stat-label">Total Reviews</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Satisfied Customers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Would Recommend</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-controls">
+                <button class="filter-btn active" onclick="filterReviews('all')">All Reviews</button>
+                <button class="filter-btn" onclick="filterReviews('personal')">Personal Loans</button>
+                <button class="filter-btn" onclick="filterReviews('business')">Business Loans</button>
+                <button class="filter-btn" onclick="filterReviews('emergency')">Emergency Loans</button>
+                <button class="filter-btn" onclick="filterReviews('5-star')">5 Star Only</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <div class="container">
+            <div class="reviews-grid" id="reviewsGrid">
+                <!-- Reviews will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Write Review Section -->
+    <section class="write-review">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--text-dark);">Share Your Experience</h2>
+            <div class="review-form">
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i>
+                    Thank you! Your review has been submitted successfully.
+                </div>
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label for="reviewerName">Your Name *</label>
+                        <input type="text" id="reviewerName" name="reviewerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanType">Loan Type *</label>
+                        <select id="loanType" name="loanType" required>
+                            <option value="">Select loan type</option>
+                            <option value="personal">Personal Loan</option>
+                            <option value="business">Business Loan</option>
+                            <option value="emergency">Emergency Loan</option>
+                            <option value="education">Education Loan</option>
+                            <option value="vehicle">Vehicle Finance</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Rating *</label>
+                        <div class="star-rating" id="starRating">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <input type="hidden" id="rating" name="rating" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewText">Your Review *</label>
+                        <textarea id="reviewText" name="reviewText" placeholder="Tell us about your experience with Net Credi..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-star"></i>
+                        Submit Review
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Net Credi Financial</h3>
+                    <p>Empowering financial freedom in South Africa through innovative lending solutions.</p>
+                    <div style="margin-top: 1rem;">
+                        <i class="fab fa-facebook" style="margin-right: 1rem; font-size: 1.5rem; color: var(--accent-color);"></i>
+                        <i class="fab fa-twitter" style="margin-right: 1rem; font-size: 1.5rem; color: var(--accent-color);"></i>
+                        <i class="fab fa-linkedin" style="margin-right: 1rem; font-size: 1.5rem; color: var(--accent-color);"></i>
+                        <i class="fab fa-instagram" style="font-size: 1.5rem; color: var(--accent-color);"></i>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="apply.html">Apply Now</a></li>
+                        <li><a href="review.html">Reviews</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="profile.html">Track Application</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Loan Types</h3>
+                    <ul>
+                        <li><a href="#">Personal Loans</a></li>
+                        <li><a href="#">Business Loans</a></li>
+                        <li><a href="#">Emergency Loans</a></li>
+                        <li><a href="#">Education Loans</a></li>
+                        <li><a href="#">Vehicle Finance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-envelope"></i> info@netcredi.com</p>
+                    <p><i class="fas fa-phone"></i> +27 11 234 5678</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 12 Sandton Drive, Sandton, Johannesburg</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Net Credi Financial Service. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample reviews data with South African names
+        const reviews = [
+            {
+                name: "Annelie van Wyk",
+                loanType: "personal",
+                rating: 5,
+                text: "Applying was super easy, and I got my funds the same day. The customer service was exceptional and they guided me through every step. Highly recommended!",
+                date: "2025-01-15",
+                avatar: "A"
+            },
+            {
+                name: "Thabo Mthembu",
+                loanType: "business",
+                rating: 4,
+                text: "The customer support was amazing. Very helpful and professional. Got my business loan approved quickly to expand my shop.",
+                date: "2025-01-10",
+                avatar: "T"
+            },
+            {
+                name: "Liezel Botha",
+                loanType: "personal",
+                rating: 5,
+                text: "Transparent service with no hidden fees. Everything was explained clearly upfront. Fast approval and great rates!",
+                date: "2025-01-08",
+                avatar: "L"
+            },
+            {
+                name: "Sipho Ndlovu",
+                loanType: "emergency",
+                rating: 5,
+                text: "When I had a medical emergency, Net Credi came through for me. Fast processing and compassionate service when I needed it most.",
+                date: "2025-01-05",
+                avatar: "S"
+            },
+            {
+                name: "Pieter Kruger",
+                loanType: "business",
+                rating: 4,
+                text: "Great platform for business loans. The application process was straightforward and the terms were fair. Helped me grow my restaurant.",
+                date: "2025-01-03",
+                avatar: "P"
+            },
+            {
+                name: "Nomsa Dlamini",
+                loanType: "personal",
+                rating: 5,
+                text: "Excellent service! No collateral required and very fast approval. The team was professional and kept me informed throughout.",
+                date: "2024-12-28",
+                avatar: "N"
+            },
+            {
+                name: "Johan Pretorius",
+                loanType: "emergency",
+                rating: 5,
+                text: "Saved my business during a cash flow crisis. Quick approval and funds were in my account within hours. Truly reliable!",
+                date: "2024-12-25",
+                avatar: "J"
+            },
+            {
+                name: "Zanele Khumalo",
+                loanType: "personal",
+                rating: 4,
+                text: "Good experience overall. The interest rates are competitive and the repayment terms are flexible. Would use again.",
+                date: "2024-12-20",
+                avatar: "Z"
+            },
+            {
+                name: "Hennie du Toit",
+                loanType: "business",
+                rating: 5,
+                text: "Net Credi helped me start my tech business. The loan process was smooth and the support team answered all my questions promptly.",
+                date: "2024-12-18",
+                avatar: "H"
+            },
+            {
+                name: "Lerato Molefe",
+                loanType: "personal",
+                rating: 5,
+                text: "Amazing experience! From application to disbursement, everything was seamless. The mobile app is user-friendly too.",
+                date: "2024-12-15",
+                avatar: "L"
+            }
+        ];
+
+        let currentFilter = 'all';
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Star rating functionality
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('rating');
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-rating');
+                ratingInput.value = rating;
+                
+                stars.forEach((s, index) => {
+                    if (index < rating) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+
+            star.addEventListener('mouseover', function() {
+                const rating = this.getAttribute('data-rating');
+                
+                stars.forEach((s, index) => {
+                    if (index < rating) {
+                        s.style.color = '#fbbf24';
+                    } else {
+                        s.style.color = '#e5e7eb';
+                    }
+                });
+            });
+        });
+
+        document.querySelector('.star-rating').addEventListener('mouseleave', function() {
+            const currentRating = ratingInput.value;
+            stars.forEach((s, index) => {
+                if (index < currentRating) {
+                    s.style.color = '#fbbf24';
+                } else {
+                    s.style.color = '#e5e7eb';
+                }
+            });
+        });
+
+        // Review form submission
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const reviewData = {
+                name: formData.get('reviewerName'),
+                loanType: formData.get('loanType'),
+                rating: parseInt(formData.get('rating')),
+                text: formData.get('reviewText'),
+                date: new Date().toISOString().split('T')[0],
+                avatar: formData.get('reviewerName').charAt(0).toUpperCase()
+            };
+
+            // Add to reviews array
+            reviews.unshift(reviewData);
+            
+            // Save to localStorage
+            localStorage.setItem('netcredi_reviews', JSON.stringify(reviews));
+
+            // Show success message
+            document.getElementById('successMessage').classList.add('show');
+            this.reset();
+            ratingInput.value = '';
+            stars.forEach(s => s.classList.remove('active'));
+
+            // Refresh reviews display
+            displayReviews(currentFilter);
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 5000);
+        });
+
+        // Display reviews
+        function displayReviews(filter = 'all') {
+            const reviewsGrid = document.getElementById('reviewsGrid');
+            let filteredReviews = reviews;
+
+            if (filter === '5-star') {
+                filteredReviews = reviews.filter(review => review.rating === 5);
+            } else if (filter !== 'all') {
+                filteredReviews = reviews.filter(review => review.loanType === filter);
+            }
+
+            reviewsGrid.innerHTML = filteredReviews.map(review => `
+                <div class="review-card">
+                    <div class="loan-type">${getLoanTypeLabel(review.loanType)}</div>
+                    <div class="review-header">
+                        <div class="reviewer-avatar">${review.avatar}</div>
+                        <div class="reviewer-info">
+                            <h4>${review.name}</h4>
+                            <p>Verified Customer</p>
+                        </div>
+                    </div>
+                    <div class="stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+                    <p class="review-text">${review.text}</p>
+                    <div class="review-date">${formatDate(review.date)}</div>
+                </div>
+            `).join('');
+        }
+
+        // Filter reviews
+        function filterReviews(filter) {
+            currentFilter = filter;
+            
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            displayReviews(filter);
+        }
+
+        // Helper functions
+        function getLoanTypeLabel(type) {
+            const labels = {
+                'personal': 'Personal Loan',
+                'business': 'Business Loan',
+                'emergency': 'Emergency Loan',
+                'education': 'Education Loan',
+                'vehicle': 'Vehicle Finance'
+            };
+            return labels[type] || type;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
+        // Set active navigation item
+        function setActiveNavItem() {
+            const currentPage = window.location.pathname.split('/').pop() || 'review.html';
+            document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === currentPage || 
+                    (currentPage === 'review.html' && item.getAttribute('href') === 'review.html')) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                header.style.background = 'var(--white)';
+            }
+        });
+
+        // Load saved reviews from localStorage
+        window.addEventListener('load', () => {
+            const savedReviews = localStorage.getItem('netcredi_reviews');
+            if (savedReviews) {
+                const parsedReviews = JSON.parse(savedReviews);
+                // Merge with default reviews, avoiding duplicates
+                parsedReviews.forEach(savedReview => {
+                    if (!reviews.some(review => 
+                        review.name === savedReview.name && 
+                        review.date === savedReview.date
+                    )) {
+                        reviews.unshift(savedReview);
+                    }
+                });
+            }
+            displayReviews();
+            setActiveNavItem();
+        });
+    </script>
+</body>
+</html>

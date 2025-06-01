@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Loan - Net Credi Financial Service</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Mobile Bottom Navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid #e5e7eb;
+            box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.1);
+            z-index: 1000;
+            display: block;
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.7rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.25rem;
+        }
+
+        .mobile-nav-item.active,
+        .mobile-nav-item:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            padding: 2rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Application Form */
+        .application-section {
+            padding: 2rem 0;
+        }
+
+        .form-container {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 2rem;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin: 0 0.5rem;
+            position: relative;
+        }
+
+        .step.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .step.completed {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 30px;
+            height: 2px;
+            background: #e5e7eb;
+            transform: translateY(-50%);
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .step.completed::after {
+            background: var(--success-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border: 1px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            text-align: center;
+            display: none;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Loan Summary */
+        .loan-summary {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .summary-item:last-child {
+            margin-bottom: 0;
+            font-weight: 600;
+            color: var(--primary-color);
+            border-top: 1px solid #e5e7eb;
+            padding-top: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--text-dark), #374151);
+            color: white;
+            padding: 2rem 0 1rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 0.75rem;
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4b5563;
+            padding-top: 1rem;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: none;
+            }
+
+            body {
+                padding-bottom: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Required field indicator */
+        .required {
+            color: var(--warning-color);
+        }
+
+        /* File upload styling */
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border: 2px dashed #e5e7eb;
+            border-radius: 8px;
+            background: var(--bg-light);
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .file-selected {
+            border-color: var(--success-color);
+            color: var(--success-color);
+            background: rgba(16, 185, 129, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="home.html" class="logo">
+                <div class="logo-img">
+                    <i class="fas fa-coins"></i>
+                </div>
+                Net Credi
+            </a>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="apply.html">Apply</a></li>
+                <li><a href="review.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="home.html" class="mobile-nav-item">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="apply.html" class="mobile-nav-item active">
+                <i class="fas fa-plus-circle"></i>
+                <span>Apply</span>
+            </a>
+            <a href="review.html" class="mobile-nav-item">
+                <i class="fas fa-star"></i>
+                <span>Reviews</span>
+            </a>
+            <a href="contact.html" class="mobile-nav-item">
+                <i class="fas fa-phone"></i>
+                <span>Contact</span>
+            </a>
+            <a href="profile.html" class="mobile-nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Apply for Your Loan in Minutes</h1>
+            <p>Fill out the form below to apply for a personal or business loan. We'll review your details and contact you shortly.</p>
+        </div>
+    </section>
+
+    <!-- Application Section -->
+    <section class="application-section">
+        <div class="container">
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active" data-step="1">1</div>
+                <div class="step" data-step="2">2</div>
+                <div class="step" data-step="3">3</div>
+                <div class="step" data-step="4">4</div>
+            </div>
+
+            <!-- Application Form -->
+            <div class="form-container" id="applicationForm">
+                <form id="loanApplicationForm">
+                    <!-- Step 1: Personal Information -->
+                    <div class="form-step active" data-step="1">
+                        <h2 style="margin-bottom: 1.5rem; color: var(--text-dark);">Personal Information</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number <span class="required">*</span></label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="idNumber">ID Number <span class="required">*</span></label>
+                                <input type="text" id="idNumber" name="idNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
+                                <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Residential Address <span class="required">*</span></label>
+                            <textarea id="address" name="address" rows="3" required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Loan Details -->
+                    <div class="form-step" data-step="2">
+                        <h2 style="margin-bottom: 1.5rem; color: var(--text-dark);">Loan Details</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="loanType">Loan Type <span class="required">*</span></label>
+                                <select id="loanType" name="loanType" required onchange="updateLoanLimits()">
+                                    <option value="">Select loan type</option>
+                                    <option value="personal">Personal Loan</option>
+                                    <option value="business">Business Loan</option>
+                                    <option value="emergency">Emergency Loan</option>
+                                    <option value="education">Education Loan</option>
+                                    <option value="vehicle">Vehicle Finance</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="loanAmount">Loan Amount (R) <span class="required">*</span></label>
+                                <input type="number" id="loanAmount" name="loanAmount" min="1000" max="500000" required oninput="updateLoanSummary()">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="repaymentPeriod">Repayment Period <span class="required">*</span></label>
+                                <select id="repaymentPeriod" name="repaymentPeriod" required onchange="updateLoanSummary()">
+                                    <option value="">Select period</option>
+                                    <option value="6">6 months</option>
+                                    <option value="12">12 months</option>
+                                    <option value="18">18 months</option>
+                                    <option value="24">24 months</option>
+                                    <option value="36">36 months</option>
+                                    <option value="48">48 months</option>
+                                    <option value="60">60 months</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="loanPurpose">Purpose of Loan <span class="required">*</span></label>
+                                <select id="loanPurpose" name="loanPurpose" required>
+                                    <option value="">Select purpose</option>
+                                    <option value="debt-consolidation">Debt Consolidation</option>
+                                    <option value="home-improvement">Home Improvement</option>
+                                    <option value="medical">Medical Expenses</option>
+                                    <option value="education">Education</option>
+                                    <option value="business">Business Investment</option>
+                                    <option value="emergency">Emergency</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="loanSummary" class="loan-summary" style="display: none;">
+                            <h3 style="margin-bottom: 1rem; color: var(--text-dark);">Loan Summary</h3>
+                            <div class="summary-item">
+                                <span>Loan Amount:</span>
+                                <span id="summaryAmount">R0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Interest Rate:</span>
+                                <span id="summaryRate">0%</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Repayment Period:</span>
+                                <span id="summaryPeriod">0 months</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Monthly Payment:</span>
+                                <span id="summaryMonthly">R0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Employment & Income -->
+                    <div class="form-step" data-step="3">
+                        <h2 style="margin-bottom: 1.5rem; color: var(--text-dark);">Employment & Income</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="employmentStatus">Employment Status <span class="required">*</span></label>
+                                <select id="employmentStatus" name="employmentStatus" required>
+                                    <option value="">Select status</option>
+                                    <option value="employed">Employed</option>
+                                    <option value="self-employed">Self-Employed</option>
+                                    <option value="business-owner">Business Owner</option>
+                                    <option value="pensioner">Pensioner</option>
+                                    <option value="student">Student</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="monthlyIncome">Monthly Income (R) <span class="required">*</span></label>
+                                <input type="number" id="monthlyIncome" name="monthlyIncome" min="3500" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="employer">Employer/Company Name</label>
+                                <input type="text" id="employer" name="employer">
+                            </div>
+                            <div class="form-group">
+                                <label for="workExperience">Years of Experience</label>
+                                <select id="workExperience" name="workExperience">
+                                    <option value="">Select experience</option>
+                                    <option value="0-1">0-1 years</option>
+                                    <option value="1-3">1-3 years</option>
+                                    <option value="3-5">3-5 years</option>
+                                    <option value="5-10">5-10 years</option>
+                                    <option value="10+">10+ years</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankName">Bank Name <span class="required">*</span></label>
+                            <select id="bankName" name="bankName" required>
+                                <option value="">Select your bank</option>
+                                <option value="absa">ABSA Bank</option>
+                                <option value="fnb">First National Bank (FNB)</option>
+                                <option value="standard">Standard Bank</option>
+                                <option value="nedbank">Nedbank</option>
+                                <option value="capitec">Capitec Bank</option>
+                                <option value="african-bank">African Bank</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="accountNumber">Account Number <span class="required">*</span></label>
+                                <input type="text" id="accountNumber" name="accountNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="branchCode">Branch Code</label>
+                                <input type="text" id="branchCode" name="branchCode">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Documents & Confirmation -->
+                    <div class="form-step" data-step="4">
+                        <h2 style="margin-bottom: 1.5rem; color: var(--text-dark);">Documents & Confirmation</h2>
+                        <div class="form-group">
+                            <label>ID Document <span class="required">*</span></label>
+                            <div class="file-upload">
+                                <input type="file" id="idDocument" name="idDocument" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <label for="idDocument" class="file-upload-label">
+                                    <i class="fas fa-upload"></i>
+                                    <span>Upload ID Document</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Proof of Income <span class="required">*</span></label>
+                            <div class="file-upload">
+                                <input type="file" id="proofOfIncome" name="proofOfIncome" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <label for="proofOfIncome" class="file-upload-label">
+                                    <i class="fas fa-upload"></i>
+                                    <span>Upload Proof of Income</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Bank Statements (3 months)</label>
+                            <div class="file-upload">
+                                <input type="file" id="bankStatements" name="bankStatements" accept=".pdf" multiple>
+                                <label for="bankStatements" class="file-upload-label">
+                                    <i class="fas fa-upload"></i>
+                                    <span>Upload Bank Statements</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" id="termsAccepted" name="termsAccepted" required>
+                                <span>I agree to the <a href="#" style="color: var(--primary-color);">Terms and Conditions</a> and <a href="#" style="color: var(--primary-color);">Privacy Policy</a> <span class="required">*</span></span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" id="creditCheck" name="creditCheck" required>
+                                <span>I consent to a credit check being performed <span class="required">*</span></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Form Navigation -->
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)" style="display: none;">
+                            <i class="fas fa-arrow-left"></i>
+                            Previous
+                        </button>
+                        <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">
+                            Next
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Application
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2 style="color: var(--success-color); margin-bottom: 1rem;">Thank you! Your application has been submitted.</h2>
+                <p style="margin-bottom: 1.5rem; color: var(--text-light);">Your loan application has been successfully submitted and saved to our system. We'll review your details and contact you within 24 hours.</p>
+                <div style="background: var(--bg-light); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                    <strong>Application Reference: <span id="applicationRef" style="color: var(--primary-color);"></span></strong>
+                </div>
+                <a href="profile.html" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                    Track Loan Application
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Net Credi Financial</h3>
+                <p>Empowering financial freedom in Nigeria through innovative lending solutions.</p>
+                <div style="margin-top: 1rem;">
+                    <i class="fab fa-facebook" style="margin-right: 1rem; font-size: 1.5rem; color: var(--accent-color);"></i>
+                    <i class="fab fa-twitter" style="margin-right: 1rem; font-size: 1.5rem; color: var(--accent-color);"></i>
+                    <i class="fab fa-linkedin" style="margin-right: 1rem; font-size: 1.5rem; color: var(--accent-color);"></i>
+                    <i class="fab fa-instagram" style="font-size: 1.5rem; color: var(--accent-color);"></i>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="apply.html">Apply Now</a></li>
+                    <li><a href="review.html">Reviews</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="profile.html">Track Application</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Loan Types</h3>
+                <ul>
+                    <li><a href="#">Personal Loans</a></li>
+                    <li><a href="#">Business Loans</a></li>
+                    <li><a href="#">Emergency Loans</a></li>
+                    <li><a href="#">Education Loans</a></li>
+                    <li><a href="#">Vehicle Finance</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-envelope"></i> info@netcredi.com</p>
+                <p><i class="fas fa-phone"></i> +234 901 234 5678</p>
+                <p><i class="fas fa-map-marker-alt"></i> 12 Adeola Street, Ikeja, Lagos</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Net Credi Financial Service. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        // Step navigation
+        function changeStep(direction) {
+            const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+            
+            if (direction === 1 && !validateCurrentStep()) {
+                return;
+            }
+
+            currentStepElement.classList.remove('active');
+            
+            if (direction === 1) {
+                document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('completed');
+                currentStep++;
+            } else {
+                currentStep--;
+            }
+
+            const newStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+            newStepElement.classList.add('active');
+
+            updateStepIndicator();
+            updateButtons();
+        }
+
+        function updateStepIndicator() {
+            document.querySelectorAll('.step').forEach((step, index) => {
+                const stepNumber = index + 1;
+                step.classList.remove('active');
+                
+                if (stepNumber === currentStep) {
+                    step.classList.add('active');
+                } else if (stepNumber < currentStep) {
+                    step.classList.add('completed');
+                }
+            });
+        }
+
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+
+            prevBtn.style.display = currentStep === 1 ? 'none' : 'flex';
+            
+            if (currentStep === totalSteps) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'flex';
+            } else {
+                nextBtn.style.display = 'flex';
+                submitBtn.style.display = 'none';
+            }
+        }
+
+        function validateCurrentStep() {
+            const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+            const requiredFields = currentStepElement.querySelectorAll('[required]');
+            
+            for (let field of requiredFields) {
+                if (!field.value.trim()) {
+                    field.focus();
+                    alert('Please fill in all required fields.');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Loan calculation functions
+        function updateLoanLimits() {
+            const loanType = document.getElementById('loanType').value;
+            const loanAmountInput = document.getElementById('loanAmount');
+            
+            const limits = {
+                'personal': { max: 200000, rate: 3 },
+                'education': { max: 150000, rate: 3.5 },
+                'business': { max: 500000, rate: 4 },
+                'vehicle': { max: 350000, rate: 3.75 },
+                'emergency': { max: 100000, rate: 5 }
+            };
+
+            if (limits[loanType]) {
+                loanAmountInput.max = limits[loanType].max;
+                loanAmountInput.placeholder = `Up to R${limits[loanType].max.toLocaleString()}`;
+            }
+            
+            updateLoanSummary();
+        }
+
+        function updateLoanSummary() {
+            const loanType = document.getElementById('loanType').value;
+            const amount = parseFloat(document.getElementById('loanAmount').value);
+            const term = parseInt(document.getElementById('repaymentPeriod').value);
+            const summaryDiv = document.getElementById('loanSummary');
+
+            if (!loanType || !amount || !term) {
+                summaryDiv.style.display = 'none';
+                return;
+            }
+
+            const rates = {
+                'personal': 3,
+                'education': 3.5,
+                'business': 4,
+                'vehicle': 3.75,
+                'emergency': 5
+            };
+
+            const rate = rates[loanType] || 4;
+            const monthlyRate = rate / 100 / 12;
+            const monthlyPayment = (amount * monthlyRate * Math.pow(1 + monthlyRate, term)) / 
+                                 (Math.pow(1 + monthlyRate, term) - 1);
+
+            document.getElementById('summaryAmount').textContent = `R${amount.toLocaleString()}`;
+            document.getElementById('summaryRate').textContent = `${rate}%`;
+            document.getElementById('summaryPeriod').textContent = `${term} months`;
+            document.getElementById('summaryMonthly').textContent = `R${monthlyPayment.toFixed(2)}`;
+
+            summaryDiv.style.display = 'block';
+        }
+
+        // File upload handling
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const label = this.nextElementSibling;
+                if (this.files.length > 0) {
+                    label.classList.add('file-selected');
+                    const fileName = this.files[0].name;
+                    label.querySelector('span').textContent = fileName;
+                } else {
+                    label.classList.remove('file-selected');
+                }
+            });
+        });
+
+        // Baserow API configuration
+        const BASEROW_CONFIG = {
+            token: 'qVXtv5uzHaSzMLbLRE7rITJHlc4G6WN2',
+            tableId: '558162',
+            databaseId: '234630',
+            apiUrl: 'https://api.baserow.io/api/database/rows/table/558162/'
+        };
+
+        // Function to upload file to Baserow
+        async function uploadFileToBaserow(file) {
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const response = await fetch('https://api.baserow.io/api/user-files/upload-file/', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Token ${BASEROW_CONFIG.token}`
+                    },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('File uploaded successfully:', result);
+                    return result;
+                } else {
+                    const errorText = await response.text();
+                    console.error('File upload failed:', response.status, errorText);
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error uploading file:', error);
+                return null;
+            }
+        }
+
+        // Function to send data to Baserow with correct field mapping
+        async function sendToBaserow(data) {
+            try {
+                console.log('Starting Baserow submission...');
+                
+                // Upload ID Document if exists
+                let idDocumentFile = null;
+                const idDocumentInput = document.getElementById('idDocument');
+                if (idDocumentInput.files.length > 0) {
+                    console.log('Uploading ID document...');
+                    idDocumentFile = await uploadFileToBaserow(idDocumentInput.files[0]);
+                }
+
+                // Upload Bank Statement if exists
+                let bankStatementFile = null;
+                const bankStatementInput = document.getElementById('bankStatements');
+                if (bankStatementInput.files.length > 0) {
+                    console.log('Uploading bank statement...');
+                    bankStatementFile = await uploadFileToBaserow(bankStatementInput.files[0]);
+                }
+
+                // Prepare data for Baserow API with exact field IDs
+                const baserowData = {
+                    "field_4477077": `${data.personalInfo.firstName} ${data.personalInfo.lastName}`, // FullName
+                    "field_4477079": data.personalInfo.email, // Email
+                    "field_4477080": data.personalInfo.phone, // PhoneNumber
+                    "field_4477083": data.loanDetails.loanType, // LoanType
+                    "field_4477085": parseInt(data.loanDetails.loanAmount), // LoanAmount
+                    "field_4477086": parseInt(data.loanDetails.repaymentPeriod), // RepaymentPeriod
+                    "field_4477087": data.employment.employmentStatus, // EmploymentStatus
+                    "field_4477088": parseInt(data.employment.monthlyIncome), // MonthlyIncome
+                    "field_4477095": idDocumentFile ? [idDocumentFile] : [], // Id (ID Document)
+                    "field_4477096": bankStatementFile ? [bankStatementFile] : [] // BankStatement
+                };
+
+                console.log('Sending data to Baserow:', baserowData);
+
+                const response = await fetch(BASEROW_CONFIG.apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${BASEROW_CONFIG.token}`
+                    },
+                    body: JSON.stringify(baserowData)
+                });
+
+                const responseText = await response.text();
+                console.log('Baserow response status:', response.status);
+                console.log('Baserow response:', responseText);
+
+                if (response.ok) {
+                    const result = JSON.parse(responseText);
+                    console.log('✅ Application submitted to Baserow successfully:', result);
+                    return { success: true, data: result };
+                } else {
+                    console.error('❌ Baserow submission failed:', response.status, responseText);
+                    return { success: false, error: `API Error: ${response.status} - ${responseText}` };
+                }
+            } catch (error) {
+                console.error('❌ Error submitting to Baserow:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Form submission
+        document.getElementById('loanApplicationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!validateCurrentStep()) {
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(this);
+            const applicationData = {
+                personalInfo: {
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    idNumber: formData.get('idNumber'),
+                    dateOfBirth: formData.get('dateOfBirth'),
+                    address: formData.get('address')
+                },
+                loanDetails: {
+                    loanType: formData.get('loanType'),
+                    loanAmount: formData.get('loanAmount'),
+                    repaymentPeriod: formData.get('repaymentPeriod'),
+                    loanPurpose: formData.get('loanPurpose')
+                },
+                employment: {
+                    employmentStatus: formData.get('employmentStatus'),
+                    monthlyIncome: formData.get('monthlyIncome'),
+                    employer: formData.get('employer'),
+                    workExperience: formData.get('workExperience'),
+                    bankName: formData.get('bankName'),
+                    accountNumber: formData.get('accountNumber'),
+                    branchCode: formData.get('branchCode')
+                },
+                applicationDate: new Date().toISOString(),
+                status: 'pending'
+            };
+
+            // Generate application reference
+            const applicationRef = 'NC' + Date.now().toString().slice(-8);
+            applicationData.applicationRef = applicationRef;
+
+            try {
+                console.log('📝 Submitting application data:', applicationData);
+                
+                // Send to Baserow first
+                const baserowResult = await sendToBaserow(applicationData);
+                
+                if (baserowResult.success) {
+                    console.log('✅ Baserow submission successful');
+                    
+                    // Save to localStorage with Baserow ID
+                    applicationData.baserowId = baserowResult.data.id;
+                    const applications = JSON.parse(localStorage.getItem('netcredi_applications') || '[]');
+                    applications.push(applicationData);
+                    localStorage.setItem('netcredi_applications', JSON.stringify(applications));
+                    
+                    // Show success message
+                    document.getElementById('applicationRef').textContent = applicationRef;
+                    document.getElementById('applicationForm').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    console.log('✅ Application completed successfully with reference:', applicationRef);
+                } else {
+                    console.error('❌ Baserow submission failed:', baserowResult.error);
+                    
+                    // Save locally anyway
+                    const applications = JSON.parse(localStorage.getItem('netcredi_applications') || '[]');
+                    applications.push(applicationData);
+                    localStorage.setItem('netcredi_applications', JSON.stringify(applications));
+                    
+                    // Show error but still proceed
+                    alert(`Application saved locally but failed to sync with server: ${baserowResult.error}\n\nPlease contact support with reference: ${applicationRef}`);
+                    
+                    // Still show success for local save
+                    document.getElementById('applicationRef').textContent = applicationRef;
+                    document.getElementById('applicationForm').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('❌ Submission error:', error);
+                alert('An error occurred while submitting your application. Please try again or contact support.');
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Initialize page
+        window.addEventListener('load', () => {
+            updateButtons();
+        });
+    </script>
+</body>
+</html>
