@@ -430,7 +430,70 @@
             text-align: center;
             color: #9ca3af;
         }
+<style>
+.section {
+  padding: 40px 0;
+  text-align: center;
+}
 
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #666;
+}
+
+.team-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.team-upper {
+  background-color: #f4f4f4;
+}
+
+.team-photo {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  height: 400px;
+}
+
+.team-lower {
+  padding: 20px;
+  background: #fff;
+}
+
+.team-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.team-role {
+  font-size: 1.1rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.team-bio {
+  font-size: 1rem;
+  color: #444;
+}
         /* Responsive Design */
         @media (max-width: 767px) {
             .mobile-nav {
@@ -653,42 +716,47 @@
     </section>
 
     <!-- Team Section -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">Meet Our Team</h2>
-            <p class="section-subtitle">The dedicated professionals behind Net Credit Financial Service</p>
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-image">
-                        <img src="image/pexels-olly-834863.jpg" alt="Team Member">
-                    </div>
-                    <div class="team-info">
-                        <div class="team-name">Pieter van der Merwe</div>
-                        <div class="team-role">Chief Executive Officer</div>
-                        <div class="team-bio">With over 15 years in financial services, Pieter leads our mission to democratize access to credit in South Africa.</div>
-                    </div>
-                </div>
-                <div class="team-card">
-                    <div class="team-image">
-                        <img src="image/pexels-olly-733872.jpg" alt="Team Member">
-                    </div>
-                    <div class="team-info">
-                        <div class="team-name">Nomsa Mthembu</div>
-                        <div class="team-role">Chief Technology Officer</div>
-                        <div class="team-bio">A fintech innovator with expertise in building secure, scalable lending platforms that serve millions.</div>
-                    </div>
-                </div>
-                <div class="team-card">
-                    <div class="team-image">
-                        <img src="image/pexels-divinetechygirl-1181519.jpg" alt="Team Member">
-                    </div>
-                    <div class="team-info">
-                        <div class="team-name">Johan Botha</div>
-                        <div class="team-role">Head of Risk Management</div>
-                        <div class="team-bio">Ensures responsible lending practices while maintaining fast approval times for our customers.</div>
-                    </div>
-                </div>
-            </div>
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Meet Our Team</h2>
+    <p class="section-subtitle">The dedicated professionals behind Net Credit Financial Service</p>
+
+    <!-- Team Member 1 -->
+    <div class="team-card">
+      <div class="team-upper">
+        <img src="image/pexels-olly-834863.jpg" alt="Pieter van der Merwe" class="team-photo">
+      </div>
+      <div class="team-lower">
+        <div class="team-name">Pieter van der Merwe</div>
+        <div class="team-role">Chief Executive Officer</div>
+        <div class="team-bio">With over 15 years in financial services, Pieter leads our mission to democratize access to credit in South Africa.</div>
+      </div>
+    </div>
+
+    <!-- Team Member 2 -->
+    <div class="team-card">
+      <div class="team-upper">
+        <img src="image/pexels-olly-733872.jpg" alt="Nomsa Mthembu" class="team-photo">
+      </div>
+      <div class="team-lower">
+        <div class="team-name">Nomsa Mthembu</div>
+        <div class="team-role">Chief Technology Officer</div>
+        <div class="team-bio">A fintech innovator with expertise in building secure, scalable lending platforms that serve millions.</div>
+      </div>
+    </div>
+
+    <!-- Team Member 3 -->
+    <div class="team-card">
+      <div class="team-upper">
+        <img src="image/pexels-divinetechygirl-1181519.jpg" alt="Johan Botha" class="team-photo">
+      </div>
+      <div class="team-lower">
+        <div class="team-name">Johan Botha</div>
+        <div class="team-role">Head of Risk Management</div>
+        <div class="team-bio">Ensures responsible lending practices while maintaining fast approval times for our customers.</div>
+      </div>
+    </div>
+  </div>
         </div>
     </section>
 
